@@ -27,7 +27,7 @@ environments. The utility `mkvirtualenv` is a great tool to create such
 virtual environments. 
 
 Follow the instructions at 
-<virtualenvwrapper.readthedocs.io/en/latest/install.html> to install the 
+<http://virtualenvwrapper.readthedocs.io/en/latest/install.html> to install the 
 virtual environment wrapper. In short:
 
         $ sudo pip install virtualenv virtualenvwrapper
