@@ -86,3 +86,13 @@ Install the `pytdf-base-agent` at <https://gitlab.com/idealabs/pytdf-base-agent>
 while within the virtual environment for this project. In short:
 
         (myagent) $ python setup.py develop
+        
+### Install this Agent
+
+Now install this agent while in the virtual environment:
+
+        (myagent) $ python setup.py develop
+        
+## Configuration
+
+COMING SOON! Add login information
