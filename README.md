@@ -18,7 +18,7 @@ We also recommend that these agents run under a Python 3 environment (they
 should work with Python 2.7 as well; however, this is not tested). To install
 Python 3, its development toolkits, and other dependencies:
 
-        $ sudo apt-get install python3 python3-dev libffi-dev
+        $ sudo apt-get install python3 python3-dev python-pip libffi-dev
         
 ### Creating a Virtual Environment ###
 
