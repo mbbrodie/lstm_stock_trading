@@ -17,3 +17,9 @@ class SampleAgent(BaseAgent):
 
     def __init__(self, config, url):
         BaseAgent.__init__(self, config, url)
+
+        # agent, league, position = self.agent_info()
+        prices = self.prices('MSFT', type='n', n=20)
+        returns = self.returns(prices)
+        print(prices)
+        print(returns)
