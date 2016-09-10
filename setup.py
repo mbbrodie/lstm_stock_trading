@@ -25,7 +25,7 @@ class PyTest(TestCommand):
 setup(
     name='pytdf-sample-agent',
     version='0.0.1',
-    packages=['sample-agent'],
+    packages=['sample_agent'],
     include_package_data=True,
     install_requires=[
         'pandas',
