@@ -32,10 +32,12 @@ If you cannot import `configparser`, make sure that you are running Python 3.
 from sample_agent import SampleAgent
 import configparser
 
+URL = 'http://45.56.15.67:8680'  # TODO switch to production when ready
+
 
 if __name__ == '__main__':
     # Read authentication information
     config = configparser.ConfigParser()
     config.read('config.ini')
 
-    agent = SampleAgent(config)
+    agent = SampleAgent(config, URL)
