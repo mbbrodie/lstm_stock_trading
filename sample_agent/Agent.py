@@ -8,5 +8,5 @@ class SampleAgent(BaseAgent):
     portfolio in the single security with the highest returns.
     """
 
-    def __init__(self):
-        BaseAgent.__init__(self)
+    def __init__(self, config):
+        BaseAgent.__init__(self, config)
