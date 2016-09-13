@@ -41,3 +41,4 @@ if __name__ == '__main__':
     config.read('config.ini')
 
     agent = SampleAgent(config, URL)
+    agent.execute()

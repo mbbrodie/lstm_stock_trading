@@ -1,8 +1,9 @@
 ## Description ##
 
 In this agent, trades are made naively, by choosing the security with the
-highest returns in the last time period and investing 95% of the portfolio value
-in that security (the remaining 5% in cash).
+highest average returns over the last 10 minutes of collected data time period
+and investing 95% of the portfolio value un that security (the remaining 5% in
+cash).
 
 This agent is designed to be a starting point for new python agents that trade
 on the TDF. Either fork the repo or copy the code to make a new TDF agent.
