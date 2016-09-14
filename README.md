@@ -105,4 +105,43 @@ Now install this agent while in the virtual environment:
 
 ## Configuration
 
-COMING SOON! Add login information
+Be sure to create a config file called `config.ini` to read in the
+authentication information (agent id, username, and password) in order to
+connect to the TDF.
+
+The email and password are the same that you use to log in to the TDF
+website. The agent id can be found on the TDF website. Look for your agent
+either on the dashboard or on the "My Agents" page under the league in which
+it is registered (you may need to expand the "My Agents" section in the
+league panel). Click on the "Edit" button next to the agent. The id is found
+on the first row in the "Current Status" panel.
+
+Git is configured to ignore the config file so that your password in the config
+file is not pushed to the cloud. However, for security, you should use a
+password that is unique to TDF. If you need to change your password, you can
+do so at the TDF website on the "Profile" page.
+
+The `config.ini` file should look like this (replacing the information with
+your own authentication):
+
+        [TDFConnect]
+        agent_id : 42
+        email : myemail@example.com
+        password : themeaningoflife
+
+## Automatic and Periodic Trading
+
+A crontab will allow you to execute the agent periodically throughout the day.
+The markets are only open from 9:30AM EST to 4:00PM EST, and TDF collects data
+once a minute during those times. As such, you will want your agent to execute
+only during these times. To create an agent that executes every minute while
+the market is open (supposing MST), open the crontab file with:
+
+        $ crontab -e
+
+And add the following lines (making sure to change your paths):
+
+        # 10:00am to 4:00pm EST M-F
+        * 8-14 * * Mon,Tue,Wed,Thu,Fri /path/to/your/virtualenv/bin/python /path/to/your/agent/main.py
+        # 9:30am to 9:59am EST M-F
+        30-59 7 * * Mon,Tue,Wed,Thu,Fri /path/to/your/virtualenv/bin/python /path/to/your/agent/main.py
