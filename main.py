@@ -16,11 +16,28 @@ import os
 URL = 'http://45.56.15.67:8680'
 
 
-def agent_factory(config, url=URL):
+def agent_factory(config, url=None, **kwargs):
     """Builds and returns an agent.
 
     Required if the agent manager is to be used. Helpful even if not.
+
+    Parameters
+    ----------
+    config : object
+        Contains key 'TDFConnect' with another object. This other object
+        contains keys 'email', 'password', and 'id'. Reading the `config.ini`
+        as specified by the documentation will create such an object. The
+        agent manager will also create such an object.
+    url : str, default=None
+        The url of the TDF instance to which to connect. If None, uses the
+        default TDF location.
+    **kwargs : key word arguments
+        Optional key word arguments to pass in to the agent. Used only by
+        the agent manager.
     """
+    if url is None:
+        url = URL
+
     agent = SampleAgent(config, url)
     return agent
 
