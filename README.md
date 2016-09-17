@@ -145,3 +145,8 @@ And add the following lines (making sure to change your paths):
         * 8-14 * * Mon,Tue,Wed,Thu,Fri /path/to/your/virtualenv/bin/python /path/to/your/agent/main.py
         # 9:30am to 9:59am EST M-F
         30-59 7 * * Mon,Tue,Wed,Thu,Fri /path/to/your/virtualenv/bin/python /path/to/your/agent/main.py
+
+## Agent Manager
+
+If you are running multiple agents, you may want to consider using the
+agent manager found at https://gitlab.com/idealabs/pytdf-agent-manager

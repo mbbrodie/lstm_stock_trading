@@ -13,7 +13,16 @@ from sample_agent import SampleAgent
 import configparser
 import os
 
-URL = 'http://45.56.15.67:8680'  # TODO switch to production when ready
+URL = 'http://45.56.15.67:8680'
+
+
+def agent_factory(config, url=URL):
+    """Builds and returns an agent.
+
+    Required if the agent manager is to be used. Helpful even if not.
+    """
+    agent = SampleAgent(config, url)
+    return agent
 
 
 if __name__ == '__main__':
@@ -27,5 +36,5 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read(config_loc)
 
-    agent = SampleAgent(config, URL)
+    agent = agent_factory(config, URL)
     agent.execute()
