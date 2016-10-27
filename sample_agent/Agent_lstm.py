@@ -221,7 +221,6 @@ class LstmAgent(BaseAgent):
         df_list = []
         count = 0
         lstm_stocks = pd.read_pickle('lstm_names_full').values
-        '''
         print(lstm_stocks)
         for t in tickers:
             if t not in lstm_stocks:
@@ -277,23 +276,15 @@ class LstmAgent(BaseAgent):
                 #if count > 5:
                 #    break
                 #save updated model
-        #return np.asarray(pred_arr)
+
         pred_arr = np.asarray(pred_arr)
         pickle.dump(pred_arr, open('pred_arr','wb'))
-        '''
-        pred_arr = pickle.load(open('pred_arr','rb'))
+        #pred_arr = pickle.load(open('pred_arr','rb'))
         print pred_arr
         agent = SampleAgent(self.config, self.url)    
-        #historic = self.historic(type='n', n=100, side='ask')
-        #pickle.dump(historic,open('hist.p','wb'))
-        historic = pickle.load(open('hist.p','rb'))
-        print historic.columns
-        print ('lstm now')
-        print lstm_stocks
-        print historic.columns.shape
-        print lstm_stocks.shape
-        print np.setdiff1d(historic.columns, lstm_stocks)
-        print np.setdiff1d(historic.columns, lstm_stocks).shape 
+        historic = self.historic(type='n', n=100, side='ask')
+        pickle.dump(historic,open('hist.p','wb'))
+        #historic = pickle.load(open('hist.p','rb'))
         to_del = []
         for s in historic.columns:
             if not os.path.isfile('sample_agent/lstm_models/'+str(s)+'.h5'):
