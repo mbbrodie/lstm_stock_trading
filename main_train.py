@@ -56,4 +56,4 @@ if __name__ == '__main__':
     config.read(config_loc)
 
     agent = agent_factory(config, URL)
-    agent.execute()
+    agent.update_lstm_models()

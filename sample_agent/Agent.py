@@ -23,10 +23,17 @@ class SampleAgent(BaseAgent):
     def __init__(self, config, url):
         BaseAgent.__init__(self, config, url)
 
-    def calc_simplex(self, df):
+    def calc_simplex(self, df, lstm_predictions):
+        '''after running the LSTM agent, we pass the prediction values
+        (estimated bid prices 60 min from now) into the simplex method in
+        place of the mean stock values'''
+        print('testing for lstm')
+        #print df
+        #print lstm_predictions 
         num_timesteps = df.shape[0]
         num_stocks = df.shape[1]
         stock_means = df.mean()
+        #stock_means = lstm_predictions
         improving = True
         loops_without_improve = 0
         mu = 1000
@@ -36,7 +43,8 @@ class SampleAgent(BaseAgent):
             print('mu: '+str(mu))
             mu = mu + 100
             c = np.zeros((num_stocks+num_timesteps))
-            c[0:num_stocks] = stock_means
+            #c[0:num_stocks] = stock_means
+            c[0:num_stocks] = lstm_predictions
             c[num_stocks:] = -1.0*mu /num_timesteps
             c = c * -1
             A = np.zeros((2+num_timesteps, num_stocks+num_timesteps))
@@ -45,8 +53,8 @@ class SampleAgent(BaseAgent):
             A[2:,0:num_stocks] = df - stock_means
             A[2:,num_stocks:] = -1 * np.eye(num_timesteps)
             b = np.zeros((2+num_timesteps))
-            b[0] = 1
-            b[1] = -1
+            b[0] = 0.9
+            b[1] = -0.9
 
             res = linprog(c, A_ub=A, b_ub=b, options={"disp": True}, method='simplex')
             portfolio = res.x[0:num_stocks]
@@ -65,7 +73,7 @@ class SampleAgent(BaseAgent):
             if loops_without_improve > 80:
                 improving = False
 
-        return best_portfolio * .7
+        return best_portfolio
 
     def execute(self):
         """The main agent logic. Computes and executes a single trade.

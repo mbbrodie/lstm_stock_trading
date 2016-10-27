@@ -5,6 +5,7 @@ import math
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
+from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 import cPickle as pickle
 
@@ -19,8 +20,12 @@ def create_model():
     return model 
 
 class LSTM_RNN:
-    def __init__(self, stock):
-        self.model = create_model() 
+    def __init__(self, stock, saved_file=None):
+        if saved_file is None:
+            self.model = create_model() 
+        else:
+            self.model = load_model(saved_file)
+            #self.model.compile(loss='mean_squared_error', optimizer='adam')
         self.stock = stock
 
     def train(self, trainX, trainY):
@@ -32,7 +37,7 @@ class LSTM_RNN:
 
     def predict(self, X):
         '''train on most recent 15 minutes to fine-tune weights'''
-        #self.model.
+        return self.model.predict(X,batch_size=1, verbose=1)[0]
 
     def save(self, name):
         self.model.save(name)
